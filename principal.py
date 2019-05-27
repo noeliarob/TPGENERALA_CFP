@@ -1,6 +1,6 @@
 import categorias
 
-dados=[1,1,1,2,2]
+dados=[1,3,4,5,2]
 jugada=dados
 
 
@@ -8,4 +8,6 @@ jugada=dados
 
 #print(categorias.EsPoker(jugada))
 #print(categorias.EsGenerala(jugada))
-print(categorias.esFull(jugada))
+#print(categorias.esFull(jugada))
+#print(categorias.esEscalera(categorias.ordenarDados(jugada)))
+

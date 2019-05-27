@@ -1,3 +1,4 @@
+#c:Python>python -m pip install -- upgrade pip (actualiaar) para instalar paquetes tengo que instalar pip, tabulate 42 lo debo
 from collections import Counter
 
 def SalidaDeNumero(jugada,valor):
@@ -49,7 +50,13 @@ def EsFull(jugada):
      #       return False
 
 def ordenarDados(jugada):
-    dadosOrdenados=sorted(jugada)
+    ordenar=sorted(jugada)
+    return ordenar
 
 def esEscalera(jugada):
-
+    esc1=[1,2,3,4,5]
+    esc2=[2,3,4,5,6]
+    if jugada==esc1 or jugada==esc2:
+        return True
+    else:
+        return False
