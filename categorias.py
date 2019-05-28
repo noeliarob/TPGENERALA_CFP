@@ -1,5 +1,4 @@
 #c:Python>python -m pip install -- upgrade pip (actualiaar) para instalar paquetes tengo que instalar pip, tabulate 42 lo debo
-from collections import Counter
 
 #me pide un valor, y recorre cuantas veces esta ese valor dentro de la jugada
 def SalidaDeNumero(jugada,valor):
@@ -7,7 +6,7 @@ def SalidaDeNumero(jugada,valor):
   for i in jugada:
       if i==valor:
           cantidad_de_repeticiones+=1
-  return print("El dado",valor,"salio:",cantidad_de_repeticiones,"veces")
+  print("El dado",valor,"salio:",cantidad_de_repeticiones,"veces")
 
 #la i toma el primer valor de jugada hasta el ultimo, y pregunta valor por valor la caantidad de veces que esta.
 #si el valor i esta 5 veces dentro de jugada, me retorna true
@@ -49,3 +48,4 @@ def esEscalera(jugada):
         return True
     else:
         return False
+
