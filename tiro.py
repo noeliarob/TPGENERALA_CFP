@@ -2,13 +2,10 @@ import random
 import categorias
 
 # ACA PRUEBO MIS FUNCIONES INTEGRANDO EL RANDOM NUEVO DE NOE
-# ACA EL PROFE HACE UN COMENTARIO
-
 
 opcionElegida = ""
 dados = []
 contadorTiradas = 1
-
 
 # Esta función es la tirada random de X cantidad de dados
 # se la invoca para la primer tirada de 5 dados
@@ -19,7 +16,6 @@ def tirar_dados(dados):
         dados.append(random.randint(1,6))
     return dados
 
-
 # Ésta función le explica al usuario cómo proceder,
 # pide que elija el procedimiento a seguir y devuelve esa elección
 def elegirProcedimiento():
@@ -28,7 +24,6 @@ def elegirProcedimiento():
     global opcionElegida
     opcionElegida = procedElegido.upper()
     return procedElegido.upper()
-
 
 # Ésta función vuelve a tirar los 5 dados nuevamente:
 # primero le suma 1 al contador de tiradas,
@@ -42,7 +37,6 @@ def tirarTodoNuevo():
     dados.clear()
     return tirar_dados(dados)
 
-
 # Ésta función simplemente imprime y devuelve la lista de dados con las que
 # el usuario eligió quedarse tras haber decidido terminar su turno
 # o tras haber agotado las 3 tiradas posibles.
@@ -50,20 +44,31 @@ def aceptarTirada():
     print("Turno finalizado. Se ha quedado con los siguientes dados:")
     return dados
 
-def definiciones():
-    print("Turno finalizado. Se ha quedado con los siguientes dados:")
-    print(dados)
-    if dados==categorias.esEscalera(jugada=dados):
-        print("obtuvo una escalera",dados)
-    if dados==categorias.esFull(jugada=dados):
-        print("obtuvo full", dados)
-    if dados==categorias.EsGenerala(jugada=dados):
-        print("obtuvo generala")
-    if dados==categorias.EsPoker(jugada=dados):
-        print("obtuvo poker")
-    if dados!=categorias.esEscalera(jugada=dados) and dados!=categorias.esFull(jugada=dados) and dados!=categorias.EsGenerala(jugada=dados) and dados!=categorias.EsPoker(jugada=dados):
-        valor=int(input("ingrese el valor del cual quiere ver las repeticiones"))
-        return categorias.SalidaDeNumero(jugada=dados,valor=valor)
+# Ésta función define si el usuario obtuvo o no una jugada especial
+# Si el usuario no obtuvo ninguna jugada especial podrá elegir que dados anotarse
+# Lo de anotarse los dados hay que hacer otra función aparte
+# También hay que agregar un RETURN en cada opción para comparar lo obtenido mas adelante al anotar los puntos
+def definiciones(dados):
+    print("Turno finalizado. Se ha quedado con los siguientes dados: ",dados)
+    queCategoria=False
+    while queCategoria != True:
+        if queCategoria != categorias.esEscalera(dados):
+            print("Obtuvo una escalera:",dados)
+            queCategoria=True
+        elif queCategoria != categorias.esFull(dados):
+            print("Obtuvo Full:",dados)
+            queCategoria=True
+        elif queCategoria != categorias.EsGenerala(dados):
+            print("Obtuvo Generala:", dados)
+            queCategoria=True
+        elif queCategoria != categorias.EsPoker(dados):
+            print("Obtuvo Poker:",dados)
+            queCategoria=True
+        else:
+            print("No obtuvo ninguna jugada especial.")
+            valor=int(input("Ingrese el valor del dado que se anotará: "))
+            categorias.SalidaDeNumero(dados,valor)
+            queCategoria=True
 
 
 # Ésta función es para elegir uno o varios dados de una lista de dados previa
@@ -91,8 +96,7 @@ ref_opciones = {
     "E":modificarDados
 }
 
-
-# ESTE SERÍA EL PROGRAMA PRINCIPAL
+# La siguiente función sería la principal del PROGRAMA PRINCIPAL
 # Primero imprime el numero de tirada
 # Luego invoca la función de tirar los dados random (por defecto 5 dados) para luego mostrar los dados
 # Después entra en un while donde se deben cumplir AMBAS condiciones
@@ -111,17 +115,10 @@ ref_opciones = {
 # para imprimir la tirada final con la que el usuario se quedó.
 
 def programa_principal():
-    print("La tirada número",contadorTiradas,"obtuvo los siguientes dados:")
-    tirar_dados(dados)
-    print(dados)
+    print("La tirada número",contadorTiradas,"obtuvo los siguientes dados:",tirar_dados(dados))
     while contadorTiradas != 3 and elegirProcedimiento() != "T":
         if opcionElegida in ref_opciones:
          print(ref_opciones[opcionElegida]())
         else:
             print("ERROR. Esa opción no es correcta. Por favor ingrese una opción válida.")
-    return definiciones()
-
-# ACÁ TERMINA EL PROGRAMA
-
-# Ya corregí lo que me faltaba, ahora ingresando cualquier caracter incorrecto
-# salta un mensaje de error y vuelve a ingresar en el ciclo while.
+    return definiciones(dados)
