@@ -21,12 +21,19 @@ def guardar_partida(nombre_partida):
 
 ###consultar primero el id de la partida segun el nombre
 
+######UNIR TODAS LAS DE RESULTADOS PARCIALES EN UNA SOLA FUNCION:
+###NECESITO QUE UNA VEZ QUE EL JUGADOR TIRO Y SE QUEDO CON LOS DADOS: ME QUEDE EN UNA LISTA LA CANTIDAD DE PUNTAJE QUE OBTUVO
+###EN ESA JUGADA: EJEMPLO:
+###1 2 3 4 5 6 E F P G 2G
+##[0,0,0,8,0,0,0,0,0,0,0]
+
 def guardar_resultados(resultados_parciales):
     c.execute('insert into RESULTADOS_PARCIALES_USUARIOS("1","2","3","4","5","6",E,F,P,G,"2G") values ({},{},{},{},{},{},{},{},{},{},{});'.format(resultados_parciales[0],resultados_parciales[1],resultados_parciales[2],resultados_parciales[3],resultados_parciales[4],resultados_parciales[5],resultados_parciales[6],resultados_parciales[7],resultados_parciales[8],resultados_parciales[9],resultados_parciales[10]))
     base.commit()
 
 
-
+###UNIR TODAS LAS DE RESULTADOS PARCIALES EN UNA SOLA FUNCION:
+#TENGO QUE UTILIZAR LA ULTIMA LISTA DE DADOS CON LA QUE SE QUEDO EL JUGADOR.
 def guardar_dados(dados):
     c.execute('insert into RESULTADOS_PARCIALES_USUARIOS(d1,d2,d3,d4,d5) values ({},{},{},{},{});'.format(dados[0],dados[1],dados[2],dados[3],dados[4]))
     base.commit()
